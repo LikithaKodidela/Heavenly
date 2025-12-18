@@ -94,6 +94,19 @@ module.exports.destroyListing = async (req, res) => {
   res.redirect("/listings");
 };
 
+module.exports.listingsByCategory = async (req, res) => {
+    const { category } = req.params;
+    try {
+        const allListings = await Listing.find({ category });
+        res.render('listings/index.ejs', { allListings });
+    } catch (err) {
+        console.log(err);
+        req.flash('error', 'Unable to fetch listings for this category');
+        res.redirect('/listings');
+    }
+};
+
+
 // module.exports.updateListing=async (req, res) => {
 //   let { id } = req.params;
 //   if(!req.body.listing)

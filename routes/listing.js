@@ -30,6 +30,8 @@ router
 //Edit Route
 router.get("/:id/edit",isOwner,isLoggedIn, wrapAsync(listingController.renderEditForm));
 
+// Route to get listings by category
+router.get('/category/:category', wrapAsync(listingController.listingsByCategory));
 
 
 module.exports = router;
