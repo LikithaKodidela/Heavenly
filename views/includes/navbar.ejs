@@ -2,6 +2,7 @@
   /* ===== NAVBAR ===== */
   .navbar {
     z-index: 1050;
+    padding: 0.4rem 1rem; /* reduce top-bottom space */
   }
 
   /* Search styles */
@@ -10,6 +11,7 @@
     color: #fff;
     border-radius: 25px;
     padding: 0 1rem;
+    height: 38px; /* match input height */
   }
 
   .search-btn:hover {
@@ -19,7 +21,15 @@
 
   .search-input {
     border-radius: 25px;
-    padding: 0.5rem 3rem;
+    padding: 0.5rem 1rem;
+    height: 38px; /* match button height */
+  }
+
+  /* Make form align vertically */
+  .navbar form {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
   }
 
   /* Mobile dropdown fix */
@@ -28,6 +38,15 @@
       background-color: #fff;
       padding: 1rem;
       border-top: 1px solid #e5e5e5;
+    }
+
+    .navbar form {
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .search-input {
+      flex: 1; /* take remaining space */
     }
   }
 </style>
@@ -50,9 +69,8 @@
         <a class="nav-link" href="/listings">Explore</a>
       </div>
 
-      <form class="d-flex ms-auto my-2 my-md-0" role="search">
-        <input class="form-control me-2 search-input" type="search"
-          placeholder="Search destinations">
+      <form class="ms-auto my-2 my-md-0" role="search">
+        <input class="form-control search-input" type="search" placeholder="Search destinations">
         <button class="btn search-btn" type="submit">
           <i class="fa-solid fa-magnifying-glass"></i> Search
         </button>
