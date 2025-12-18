@@ -2,93 +2,102 @@
   /* ===== NAVBAR ===== */
   .navbar {
     z-index: 1050;
-    padding: 0.4rem 1rem; /* reduce top-bottom space */
+    padding: 0.5rem 2rem; /* Adjusted for better spacing */
+    background-color: #fff;
   }
 
-  /* Search styles */
+  /* Centering Logic */
+  .navbar-collapse {
+    display: flex !important; /* Force flex behavior */
+    justify-content: space-between; /* Space out left and right items */
+    width: 100%;
+    position: relative; /* Base for absolute centering */
+  }
+
+  .search-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+  }
+
+  /* Search bar styling */
+  .search-input {
+    border-radius: 25px 0 0 25px !important;
+    border-right: none;
+    padding-left: 1.5rem;
+    width: 250px;
+    height: 45px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+  }
+
   .search-btn {
     background-color: #fe424d;
     color: #fff;
-    border-radius: 25px;
-    padding: 0 1rem;
-    height: 38px; /* match input height */
+    border-radius: 0 25px 25px 0 !important;
+    padding: 0 1.2rem;
+    height: 45px;
+    border: 1px solid #ced4da;
+    border-left: none;
+    transition: 0.2s;
   }
 
   .search-btn:hover {
-    background-color: #fe424d;
+    background-color: #ff385c;
     color: #fff;
   }
 
-  .search-input {
-    border-radius: 25px;
-    padding: 0.5rem 1rem;
-    height: 38px; /* match button height */
-  }
-
-  /* Make form align vertically */
-  .navbar form {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  /* Mobile dropdown fix */
-  @media (max-width: 768px) {
-    .navbar-collapse {
-      background-color: #fff;
-      padding: 1rem;
-      border-top: 1px solid #e5e5e5;
-    }
-
-    .navbar form {
+  /* Responsive fixes */
+  @media (max-width: 992px) {
+    .search-container {
+      position: static;
+      transform: none;
       width: 100%;
-      margin-top: 0.5rem;
+      margin: 10px 0;
     }
-
-    .search-input {
-      flex: 1; /* take remaining space */
+    .navbar-collapse {
+      flex-direction: column;
+      align-items: flex-start;
     }
+    .search-input { width: 100%; }
   }
 </style>
 
 <nav class="navbar navbar-expand-md bg-white border-bottom sticky-top">
   <div class="container-fluid">
-
     <a class="navbar-brand" href="/listings">
-      <i class="fa-regular fa-compass"></i>
+      <i class="fa-regular fa-compass" style="color: #fe424d; font-size: 1.8rem;"></i>
     </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-      data-bs-target="#navbarNavAltMarkup">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-
       <div class="navbar-nav">
         <a class="nav-link" href="/listings">Explore</a>
       </div>
 
-      <form class="ms-auto my-2 my-md-0" role="search">
-        <input class="form-control search-input" type="search" placeholder="Search destinations">
-        <button class="btn search-btn" type="submit">
-          <i class="fa-solid fa-magnifying-glass"></i> Search
-        </button>
-      </form>
+      <div class="search-container">
+        <form action="/listings" method="GET" class="d-flex">
+          <input class="form-control search-input" type="search" name="search" placeholder="Search destinations">
+          <button class="btn search-btn" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
 
-      <div class="navbar-nav ms-md-3">
+      <div class="navbar-nav ms-auto">
         <a class="nav-link" href="/listings/new">Airbnb your home</a>
-
         <% if(!currUser) { %>
           <a class="nav-link fw-bold" href="/signup">Sign up</a>
           <a class="nav-link fw-bold" href="/login">Log in</a>
         <% } %>
-
         <% if(currUser) { %>
           <a class="nav-link fw-bold" href="/logout">Log out</a>
         <% } %>
       </div>
-
     </div>
   </div>
 </nav>
